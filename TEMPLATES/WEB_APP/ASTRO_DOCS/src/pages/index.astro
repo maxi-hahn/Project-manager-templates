@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import CodeBlock from "../components/CodeBlock.astro";
+import NotifyForm from "../components/NotifyForm.astro";
+import { config } from "../config";
+---
+
+<BaseLayout>
+  <Hero />
+
+  {config.sections.map((section) => (
+    <Section id={section.id} title={section.title} content={section.content} />
+  ))}
+
+  <Section id="instalacion" title={config.install.title}>
+    <div class="flex flex-col gap-4">
+      {config.install.steps.map((step) => (
+        <CodeBlock label={step.label} code={step.command} />
+      ))}
+    </div>
+  </Section>
+
+  <Section id="features" title="Features">
+    <div class="grid gap-4 sm:grid-cols-2">
+      {config.features.map((feature) => (
+        <div class="rounded-lg border border-border bg-card p-5">
+          <h3 class="font-medium text-white">{feature.title}</h3>
+          <p class="mt-1 text-sm text-neutral-400">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="notificaciones" title="Mantenete al día">
+    <NotifyForm />
+  </Section>
+</BaseLayout>

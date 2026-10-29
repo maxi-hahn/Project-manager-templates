@@ -1,0 +1,80 @@
+---
+import { config } from "../config";
+
+const { notify } = config;
+---
+
+{notify.enabled && (
+  <div class="rounded-lg border border-border bg-card p-6">
+    <h3 class="text-lg font-semibold text-white">{notify.title}</h3>
+    <p class="mt-1 text-sm text-neutral-400">{notify.description}</p>
+
+    <form id="notify-form" class="mt-5 flex flex-col gap-4">
+      <label class="flex cursor-pointer items-center gap-3 text-sm text-neutral-300">
+        <input
+          type="checkbox"
+          id="notify-checkbox"
+          class="h-4 w-4 cursor-pointer rounded border-border bg-bg accent-accent"
+        />
+        {notify.checkboxLabel}
+      </label>
+
+      <div id="notify-email-wrapper" class="hidden flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          id="notify-email"
+          placeholder={notify.emailPlaceholder}
+          required
+          class="flex-1 rounded-md border border-border bg-bg px-3 py-2 text-sm text-white placeholder-neutral-500 outline-none focus:border-accent"
+        />
+        <button
+          type="submit"
+          class="rounded-md bg-accent px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        >
+          {notify.submitLabel}
+        </button>
+      </div>
+
+      <p id="notify-message" class="hidden text-sm"></p>
+    </form>
+  </div>
+)}
+
+<script define:vars={{ endpoint: notify.endpoint, successMessage: notify.successMessage, errorMessage: notify.errorMessage }}>
+  const checkbox = document.getElementById("notify-checkbox");
+  const wrapper = document.getElementById("notify-email-wrapper");
+  const form = document.getElementById("notify-form");
+  const message = document.getElementById("notify-message");
+
+  checkbox?.addEventListener("change", () => {
+    wrapper?.classList.toggle("hidden", !checkbox.checked);
+    wrapper?.classList.toggle("flex", checkbox.checked);
+  });
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!message) return;
+    const email = document.getElementById("notify-email")?.value;
+    if (!email || !endpoint) {
+      message.textContent = errorMessage;
+      message.className = "text-sm text-red-400";
+      return;
+    }
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      message.textContent = successMessage;
+      message.className = "text-sm text-green-400";
+      form.reset();
+      wrapper?.classList.add("hidden");
+      wrapper?.classList.remove("flex");
+    } catch {
+      message.textContent = errorMessage;
+      message.className = "text-sm text-red-400";
+    }
+  });
+</script>

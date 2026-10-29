@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { config } from "../config";
+
+const releases = [
+  {
+    version: "0.1.0",
+    date: "2025-01-01",
+    changes: ["Versión inicial"],
+  },
+];
+---
+
+<BaseLayout title="Changelog">
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h1 class="text-3xl font-bold text-white">Changelog</h1>
+    <p class="mt-2 text-neutral-400">Historial de versiones de {config.name}.</p>
+
+    <div class="mt-10 flex flex-col gap-8">
+      {releases.map((release) => (
+        <div class="border-l-2 border-accent pl-6">
+          <div class="flex items-baseline gap-3">
+            <h2 class="text-xl font-semibold text-white">v{release.version}</h2>
+            <span class="text-sm font-mono text-neutral-500">{release.date}</span>
+          </div>
+          <ul class="mt-3 flex flex-col gap-1.5 text-sm text-neutral-400">
+            {release.changes.map((change) => (
+              <li class="flex gap-2">
+                <span class="text-accent">·</span>
+                {change}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12">
+      <a
+        href={config.releases}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-accent hover:underline"
+      >
+        Ver todas las releases en GitHub →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
