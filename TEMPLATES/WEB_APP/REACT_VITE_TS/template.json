@@ -1,0 +1,10 @@
+{
+    "name": "React Vite TypeScript",
+    "category": "web_app",
+    "category_label": "Web App (frontend)",
+    "language": "javascript",
+    "runtime": "node",
+    "description": "Aplicación React con Vite y TypeScript",
+    "version": "1.0.0",
+    "requires": ["node"]
+}

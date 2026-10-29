@@ -6,7 +6,8 @@
     "compatible_with": [
         "python_fastapi",
         "react_vite",
-        "react_vite_feature_based"
+        "react_vite_feature_based",
+        "react_vite_typescript"
     ],
     "files_by_language": {
         "python": "python/Dockerfile",

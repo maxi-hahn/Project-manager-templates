@@ -1,0 +1,10 @@
+{
+    "name": "CSharp Clean Architecture",
+    "category": "web_api",
+    "category_label": "Web API (backend)",
+    "language": "csharp",
+    "runtime": "dotnet",
+    "description": "API REST con Clean Architecture en ASP.NET Core",
+    "version": "1.0.0",
+    "requires": ["dotnet"]
+}
