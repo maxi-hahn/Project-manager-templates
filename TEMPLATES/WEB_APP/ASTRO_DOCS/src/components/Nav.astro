@@ -1,0 +1,24 @@
+---
+import { config } from "../config";
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+    <a href="/" class="flex items-center gap-2 text-sm font-semibold text-white">
+      <span class="inline-block h-2 w-2 rounded-full bg-accent"></span>
+      {config.name}
+    </a>
+    <nav class="flex items-center gap-6 text-sm">
+      {config.nav.map((item) => (
+        <a
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+          class="text-neutral-400 transition-colors hover:text-white"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

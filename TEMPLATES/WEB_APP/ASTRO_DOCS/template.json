@@ -1,0 +1,10 @@
+{
+  "name": "Astro Docs",
+  "category": "web_app",
+  "category_label": "Web App (frontend)",
+  "language": "javascript",
+  "runtime": "node",
+  "description": "Sitio de documentación con Astro y Tailwind",
+  "version": "1.0.0",
+  "requires": ["node"]
+}
